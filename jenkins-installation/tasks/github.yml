@@ -1,0 +1,16 @@
+- name: Clone a github repository into /opt.
+  git:
+    repo: https://github.com/mkaplan-kumoco/jenkins.git
+    version: master
+    dest: /opt/jenkins
+ 
+- name: run jenkins with docker-compose
+  docker_compose:
+    project_src: /opt/jenkins
+    remove_images: local
+    state: present
+  register: output
+
+- debug:
+    var: output
+

@@ -1,0 +1,16 @@
+    - name: sleep 10 seconds for node become ready 
+      wait_for:
+        timeout: 10
+      delegate_to: localhost
+
+    - name: COPY TOKEN FROM MASTER
+      copy:
+        src: ./roles/k8s-installation/temp-files/
+        dest: /tmp/
+
+    - name: Add slave nodes to cluster
+      become: yes
+      become_user: root
+      shell:  find /tmp/ -name kubeadm-connect-token.sh -exec sh {} \; 
+
+

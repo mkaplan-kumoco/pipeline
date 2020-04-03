@@ -1,0 +1,8 @@
+[k8s-nodes]
+k8smaster ansible_host=192.168.130.152  ansible_user=mkaplan ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_ssh_private_key_file=../../SSH_PRIV_KEY
+k8snode1  ansible_host=192.168.130.153  ansible_user=mkaplan ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_ssh_private_key_file=../../SSH_PRIV_KEY
+k8snode2  ansible_host=192.168.130.154  ansible_user=mkaplan ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_ssh_private_key_file=../../SSH_PRIV_KEY
+
+[jenkins]
+jenkins   ansible_host=192.168.130.155  ansible_user=mkaplan ansible_ssh_common_args='-o StrictHostKeyChecking=no' ansible_ssh_private_key_file=../../SSH_PRIV_KEY
+

@@ -1,0 +1,56 @@
+---
+- name: Ensure old versions of Docker are not installed.
+  package:
+    name:
+      - docker
+      - docker-common
+      - docker-engine
+    state: absent
+
+
+- name: Install Epel Repository
+  package:
+    name:
+      - epel-release
+    state: latest
+
+
+- name: Install Git and Python Libs
+  package:
+    name:
+      - git
+      - python-devel
+      - python-pip
+    state: latest
+
+- name: Upgrade pip
+  pip:
+    name: pip
+    state: forcereinstall
+
+- name: Upgrade python library - docker-compose
+  pip:
+    name:
+      - docker-compose
+
+
+- name: Add Docker GPG key.
+  rpm_key:
+    key: "{{ docker_yum_gpg_key }}"
+    state: present
+
+- name: Add Docker repository.
+  get_url:
+    url: "{{ docker_yum_repo_url }}"
+    dest: '/etc/yum.repos.d/docker-{{ docker_edition }}.repo'
+    owner: root
+    group: root
+    mode: 0644
+
+
+- name: Add docker group.
+  group:
+    name: "docker"
+    state: present
+    gid:  993
+
